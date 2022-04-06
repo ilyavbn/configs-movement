@@ -97,7 +97,7 @@ class ManualWindow(tk.Toplevel):
         ## Nvim
         nvim_btn = Button(self, image=nvim_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                          command=lambda: changeFile("neovim")))
+                          command=lambda: changeFile("neovim"))
         nvim_btn.image=nvim_img
         nvim_btn.pack()
         nvim_btn.place(x=24,y=24)
@@ -105,7 +105,7 @@ class ManualWindow(tk.Toplevel):
         ## Alacritty
         alacritty_btn = Button(self, image=alacritty_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                               command=lambda: changeFile("alacritty")))
+                               command=lambda: changeFile("alacritty"))
         alacritty_btn.image=alacritty_img
         alacritty_btn.pack()
         alacritty_btn.place(x=272,y=24)
@@ -113,7 +113,7 @@ class ManualWindow(tk.Toplevel):
         ## Dhclient
         dhclient_btn = Button(self, image=dhclient_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                              command=lambda: changeFile("dhclient")))
+                              command=lambda: changeFile("dhclient"))
         dhclient_btn.image=dhclient_img
         dhclient_btn.pack()
         dhclient_btn.place(x=148, y=142)
@@ -121,7 +121,7 @@ class ManualWindow(tk.Toplevel):
         ## Mime
         mime_btn = Button(self, image=mime_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                          command=lambda: changeFile("mime")))
+                          command=lambda: changeFile("mime"))
         mime_btn.image=mime_img
         mime_btn.pack()
         mime_btn.place(x=24, y=266)
@@ -129,7 +129,7 @@ class ManualWindow(tk.Toplevel):
         ## SSH
         ssh_btn = Button(self, image=ssh_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                         command=lambda: changeFile("ssh")))
+                         command=lambda: changeFile("ssh"))
         ssh_btn.image=ssh_img
         ssh_btn.pack()
         ssh_btn.place(x=272, y=266)
@@ -137,7 +137,7 @@ class ManualWindow(tk.Toplevel):
         ## Vimrc
         vimrc_btn = Button(self, image=vim_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                           command=lambda: changeFile("vimrc")))
+                           command=lambda: changeFile("vimrc"))
         vimrc_btn.image=vim_img
         vimrc_btn.pack()
         vimrc_btn.place(x=396, y=24)
@@ -145,7 +145,7 @@ class ManualWindow(tk.Toplevel):
         ## Fstab
         fstab_btn = Button(self, image=fstab_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                           command=lambda: changeFile("fstab")))
+                           command=lambda: changeFile("fstab"))
         fstab_btn.image=fstab_img
         fstab_btn.pack()
         fstab_btn.place(x=272, y=142)
@@ -153,7 +153,7 @@ class ManualWindow(tk.Toplevel):
         ## Hostname
         hostname_btn = Button(self, image=hostname_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                              command=lambda: changeFile("hostname")))
+                              command=lambda: changeFile("hostname"))
         hostname_btn.image=hostname_img
         hostname_btn.pack()
         hostname_btn.place(x=396, y=142)
@@ -161,7 +161,7 @@ class ManualWindow(tk.Toplevel):
         ## Sudoers
         sudoers_btn = Button(self, image=sudoers_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                             command=lambda: changeFile("sudoers")))
+                             command=lambda: changeFile("sudoers"))
         sudoers_btn.image=sudoers_img
         sudoers_btn.pack()
         sudoers_btn.place(x=20, y=390)
@@ -169,7 +169,7 @@ class ManualWindow(tk.Toplevel):
         ## x11
         x11_btn = Button(self, image=x11_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                         command=lambda: changeFile("x11")))
+                         command=lambda: changeFile("x11"))
         x11_btn.image=x11_img
         x11_btn.pack()
         x11_btn.place(x=396, y=266)
@@ -177,7 +177,7 @@ class ManualWindow(tk.Toplevel):
         ## Gitconfig
         gitconfig_btn = Button(self, image=gitconfig_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                               command=lambda: changeFile("gitconfig")))
+                               command=lambda: changeFile("gitconfig"))
         gitconfig_btn.image=gitconfig_img
         gitconfig_btn.pack()
         gitconfig_btn.place(x=516, y=390)
@@ -185,7 +185,7 @@ class ManualWindow(tk.Toplevel):
         ## Hosts
         hosts_btn = Button(self, image=hosts_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                           command=lambda: changeFile("hosts")))
+                           command=lambda: changeFile("hosts"))
         hosts_btn.image=hosts_img
         hosts_btn.pack()
         hosts_btn.place(x=520, y=142)
@@ -193,7 +193,7 @@ class ManualWindow(tk.Toplevel):
         ## Profile
         profile_btn = Button(self, image=profile_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                             command=lambda: changeFile("profile")))
+                             command=lambda: changeFile("profile"))
         profile_btn.image=profile_img
         profile_btn.pack()
         profile_btn.place(x=24, y=142)
@@ -201,7 +201,7 @@ class ManualWindow(tk.Toplevel):
         ## Sysconfig
         sysconfig_btn = Button(self, image=sysconfig_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                               command=lambda: changeFile("sysconfig")))
+                               command=lambda: changeFile("sysconfig"))
         sysconfig_btn.image=sysconfig_img
         sysconfig_btn.pack()
         sysconfig_btn.place(x=520, y=266)
@@ -209,7 +209,7 @@ class ManualWindow(tk.Toplevel):
         ## Xinitrc
         xinitrc_btn = Button(self, image=xinitrc_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                             command=lambda: changeFile("xinitrc")))
+                             command=lambda: changeFile("xinitrc"))
         xinitrc_btn.image=xinitrc_img
         xinitrc_btn.pack()
         xinitrc_btn.place(x=268, y=390)
@@ -217,7 +217,7 @@ class ManualWindow(tk.Toplevel):
         ## Bashrc
         bashrc_btn = Button(self, image=bashrc_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                            command=lambda: changeFile("bashrc")))
+                            command=lambda: changeFile("bashrc"))
         bashrc_btn.image=bashrc_img
         bashrc_btn.pack()
         bashrc_btn.place(x=148, y=24)
@@ -225,7 +225,7 @@ class ManualWindow(tk.Toplevel):
         ## Grub
         grub_btn = Button(self, image=grub_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                          command=lambda: changeFile("grub")))
+                          command=lambda: changeFile("grub"))
         grub_btn.image=grub_img
         grub_btn.pack()
         grub_btn.place(x=144, y=390)
