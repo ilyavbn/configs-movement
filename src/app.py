@@ -1,10 +1,14 @@
 import os
+import shutil
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog as fd
 from PIL import ImageTk, Image
 
+username = os.environ.get('SUDO_USER', os.environ.get('USERNAME'))
+HOME = os.path.expanduser(f'~{username}')
+ROOT = os.path.expanduser('~')
 
 class App(tk.Tk):
     def __init__(self):
@@ -218,7 +222,8 @@ class ManualWindow(tk.Toplevel):
 
         ## Timezone
         timezone_btn = Button(self, image=timezone_img, borderwidth=0,
-                                         bg="#E0E0E0",highlightbackground="#E0E0E0")
+                                         bg="#E0E0E0",highlightbackground="#E0E0E0",
+                            command=lambda: changeFile("timezone"))
         timezone_btn.image=timezone_img
         timezone_btn.pack()
         timezone_btn.place(x=148, y=266)
@@ -233,11 +238,71 @@ class ManualWindow(tk.Toplevel):
 
         ## FILES WORKING FUNCS
         def changeFile(btn_name):
-            filename = fd.askopenfilename()
+
+            src = fd.askopenfilename()
 
             match btn_name:
                 case "editor":
-
+                    dst = HOME+"/.editor"
+                    shutil.copy(src, dst)
+                case "timezone":
+                    dst = "/etc/timezone"
+                    shutil.copy(src, dst)
+                case "resolv":
+                    dst ="/etc/resolv.conf"
+                    shutil.copy(src, dst)
+                case "neovim":
+                    dst =HOME + "/.config/nvim/init.vim"
+                    shutil.copy(src, dst)
+                case "bashrc":
+                    dst =HOME + "/.bashrc"
+                    shutil.copy(src, dst)
+                case "alacritty":
+                    dst =HOME + "/.config/alacritty/alacritty.yml"
+                    shutil.copy(src, dst)
+                case "vimrc":
+                    dst =HOME + "/.vimrc"
+                    shutil.copy(src, dst)
+                case "profile":
+                    dst ="/etc/profile"
+                    shutil.copy(src, dst)
+                case "dhclient":
+                    dst ="/etc/dhcp/dhclient.conf"
+                    shutil.copy(src, dst)
+                case "fstab":
+                    dst ="/etc/fstab"
+                    shutil.copy(src, dst)
+                case "hostname":
+                    dst ="/etc/hostname"
+                    shutil.copy(src, dst)
+                case "hosts":
+                    dst ="/etc/hosts"
+                    shutil.copy(src, dst)
+                case "mime":
+                    dst ="/etc/mime.types"
+                    shutil.copy(src, dst)
+                case "ssh":
+                    dst =HOME + "/.ssh/config"
+                    shutil.copy(src, dst)
+                case "x11":
+                    dst ="/etc/X11/xorg.conf"
+                    shutil.copy(src, dst)
+                case "sysconfig":
+                    # dst ="/etc/fstab"
+                    # shutil.copy(src, dst)
+                    print("Я не сделал")
+                case "sudoers":
+                    dst ="/etc/sudoers"
+                    shutil.copy(src, dst)
+                case "grub":
+                    dst ="/etc/default/grub"
+                    shutil.copy(src, dst)
+                case "xinitrc":
+                    dst =HOME + "/.xinitrc"
+                    shutil.copy(src, dst)
+                case "gitconfig":
+                    dst =HOME + "/gitconfig"
+                    shutil.copy(src, dst)
 
 
 
