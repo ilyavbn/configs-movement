@@ -10,6 +10,16 @@ username = os.environ.get('SUDO_USER', os.environ.get('USERNAME'))
 HOME = os.path.expanduser(f'~{username}')
 ROOT = os.path.expanduser('~')
 
+SOURCES =   [HOME+"/.editor",  "/etc/timezone", HOME+"/.config/nvim/init.vim",
+            HOME+"/.bashrc", "/etc/default/grub",
+            "/etc/resolv.conf", HOME+"/.config/alacritty/alacritty.yml",
+            HOME+"/.vimrc","/etc/profile", "/etc/dhcp/dhclient.conf",
+            "/etc/fstab", "/etc/hostname","/etc/hosts",
+            "/etc/mime.types", "/etc/mime.types","/etc/X11/xorg.conf",
+            "/etc/sudoers", HOME+"/.xinitrc", HOME+"/gitconfig",
+            HOME+"/Documents/tested2.log" ]
+
+
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -25,7 +35,7 @@ class App(tk.Tk):
         ##Auto add configs button settings
         auto_add_img = PhotoImage(file = "../res/img/auto_replace.png")
         auto_add_configs_button = Button(self, image=auto_add_img, borderwidth=0,
-                                         bg="#E0E0E0")
+                                        command=self.autoApplyConfigs, bg="#E0E0E0")
         auto_add_configs_button.image = auto_add_img
         auto_add_configs_button.pack()
         auto_add_configs_button.place(x=48, y=56)
@@ -49,7 +59,8 @@ class App(tk.Tk):
         ##Dump configs button
         backup_image = PhotoImage(file = "../res/img/backup_1.png")
         backup_button = Button(self, image=backup_image,borderwidth=0,
-                               bg="#E0E0E0",highlightbackground="#E0E0E0")
+                               bg="#E0E0E0",highlightbackground="#E0E0E0",
+                               command=self.dumpFiles)
         backup_button.image = backup_image
         backup_button.pack()
         backup_button.place(x=248, y=246)
@@ -61,6 +72,29 @@ class App(tk.Tk):
         manual_window.grab_set()
 
 
+    def dumpFiles(self):
+        dst = fd.askdirectory()
+        for i in SOURCES:
+            try:
+                shutil.copy(i,dst)
+            except FileNotFoundError:
+                print("File {0} not found".format(i))
+
+    def autoApplyConfigs(self):
+        files = fd.askopenfilenames()
+
+        source_names = []
+        dest_names = []
+
+        ### ЭТО ПОЗОРИЩЕ НИКОМУ НЕ СМОТРЕТЬ
+        # for i in SOURCES:
+            # source_names.append(os.path.basename(i))
+            # for j in files:
+                # dest_names.append(os.path.basename(j))
+                # for k in source_names:
+                    # for l in dest_names:
+                        # if k == l:
+                            # print(k + "---" + l)
 
 class ManualWindow(tk.Toplevel):
     def __init__(self, parent):
@@ -97,7 +131,7 @@ class ManualWindow(tk.Toplevel):
         ## Nvim
         nvim_btn = Button(self, image=nvim_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                          command=lambda: changeFile("neovim"))
+                          command=lambda: changeFile("init.vim"))
         nvim_btn.image=nvim_img
         nvim_btn.pack()
         nvim_btn.place(x=24,y=24)
@@ -105,7 +139,7 @@ class ManualWindow(tk.Toplevel):
         ## Alacritty
         alacritty_btn = Button(self, image=alacritty_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                               command=lambda: changeFile("alacritty"))
+                               command=lambda: changeFile("alacritty.yml"))
         alacritty_btn.image=alacritty_img
         alacritty_btn.pack()
         alacritty_btn.place(x=272,y=24)
@@ -113,7 +147,7 @@ class ManualWindow(tk.Toplevel):
         ## Dhclient
         dhclient_btn = Button(self, image=dhclient_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                              command=lambda: changeFile("dhclient"))
+                              command=lambda: changeFile("dhclient.conf"))
         dhclient_btn.image=dhclient_img
         dhclient_btn.pack()
         dhclient_btn.place(x=148, y=142)
@@ -121,7 +155,7 @@ class ManualWindow(tk.Toplevel):
         ## Mime
         mime_btn = Button(self, image=mime_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                          command=lambda: changeFile("mime"))
+                          command=lambda: changeFile("mime.types"))
         mime_btn.image=mime_img
         mime_btn.pack()
         mime_btn.place(x=24, y=266)
@@ -129,7 +163,7 @@ class ManualWindow(tk.Toplevel):
         ## SSH
         ssh_btn = Button(self, image=ssh_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                         command=lambda: changeFile("ssh"))
+                         command=lambda: changeFile("config"))
         ssh_btn.image=ssh_img
         ssh_btn.pack()
         ssh_btn.place(x=272, y=266)
@@ -137,7 +171,7 @@ class ManualWindow(tk.Toplevel):
         ## Vimrc
         vimrc_btn = Button(self, image=vim_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                           command=lambda: changeFile("vimrc"))
+                           command=lambda: changeFile(".vimrc"))
         vimrc_btn.image=vim_img
         vimrc_btn.pack()
         vimrc_btn.place(x=396, y=24)
@@ -169,7 +203,7 @@ class ManualWindow(tk.Toplevel):
         ## x11
         x11_btn = Button(self, image=x11_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                         command=lambda: changeFile("x11"))
+                         command=lambda: changeFile("xorg.conf"))
         x11_btn.image=x11_img
         x11_btn.pack()
         x11_btn.place(x=396, y=266)
@@ -177,7 +211,7 @@ class ManualWindow(tk.Toplevel):
         ## Gitconfig
         gitconfig_btn = Button(self, image=gitconfig_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                               command=lambda: changeFile("gitconfig"))
+                               command=lambda: changeFile(".gitconfig"))
         gitconfig_btn.image=gitconfig_img
         gitconfig_btn.pack()
         gitconfig_btn.place(x=516, y=390)
@@ -209,7 +243,7 @@ class ManualWindow(tk.Toplevel):
         ## Xinitrc
         xinitrc_btn = Button(self, image=xinitrc_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                             command=lambda: changeFile("xinitrc"))
+                             command=lambda: changeFile(".xinitrc"))
         xinitrc_btn.image=xinitrc_img
         xinitrc_btn.pack()
         xinitrc_btn.place(x=268, y=390)
@@ -217,7 +251,7 @@ class ManualWindow(tk.Toplevel):
         ## Bashrc
         bashrc_btn = Button(self, image=bashrc_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                            command=lambda: changeFile("bashrc"))
+                            command=lambda: changeFile(".bashrc"))
         bashrc_btn.image=bashrc_img
         bashrc_btn.pack()
         bashrc_btn.place(x=148, y=24)
@@ -233,7 +267,7 @@ class ManualWindow(tk.Toplevel):
         ## Resolv
         resolv_btn = Button(self, image=resolv_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                            command=lambda: changeFile("resolv"))
+                            command=lambda: changeFile("resolv.conf"))
         resolv_btn.image=resolv_img
         resolv_btn.pack()
         resolv_btn.place(x=520, y=24)
@@ -249,84 +283,32 @@ class ManualWindow(tk.Toplevel):
         ## editor
         editor_btn = Button(self, image=editor_img, borderwidth=0,
                                          bg="#E0E0E0",highlightbackground="#E0E0E0",
-                            command=lambda: changeFile("editor"))
+                            command=lambda: changeFile("tested2.log"))
         editor_btn.image=editor_img
         editor_btn.pack()
         editor_btn.place(x=392, y=390)
 
         ## FILES WORKING FUNCS
-        # sources = ["/.editor",  "/etc/timezone", "/.config/nvim/init.vim", "/.bashrc",
-                   # "/etc/resolv.conf", "/.config/alacritty/alacritty.yml",
-                    # "/.vimrc","/etc/profile", "/etc/dhcp/dhclient.conf",
+        # sources =   [HOME+"/.editor",  "/etc/timezone", HOME+"/.config/nvim/init.vim",
+                    # HOME+"/.bashrc", "/etc/default/grub",
+                    # "/etc/resolv.conf", HOME+"/.config/alacritty/alacritty.yml",
+                    # HOME+"/.vimrc","/etc/profile", "/etc/dhcp/dhclient.conf",
                     # "/etc/fstab", "/etc/hostname","/etc/hosts",
                     # "/etc/mime.types", "/etc/mime.types","/etc/X11/xorg.conf",
-                    # "/etc/sudoers", "/.xinitrc", "/gitconfig" ]
+                    # "/etc/sudoers", HOME+"/.xinitrc", HOME+"/gitconfig",
+                    # HOME+"/Documents/tested2.log" ]
+
+
         def changeFile(btn_name):
 
             src = fd.askopenfilename()
+            filenames = []
 
-            match btn_name:
-                case "editor":
-                    dst = HOME+"/.editor"
-                    shutil.copy(src, dst)
-                case "timezone":
-                    dst = "/etc/timezone"
-                    shutil.copy(src, dst)
-                case "resolv":
-                    dst ="/etc/resolv.conf"
-                    shutil.copy(src, dst)
-                case "neovim":
-                    dst =HOME + "/.config/nvim/init.vim"
-                    shutil.copy(src, dst)
-                case "bashrc":
-                    dst =HOME + "/.bashrc"
-                    shutil.copy(src, dst)
-                case "alacritty":
-                    dst =HOME + "/.config/alacritty/alacritty.yml"
-                    shutil.copy(src, dst)
-                case "vimrc":
-                    dst =HOME + "/.vimrc"
-                    shutil.copy(src, dst)
-                case "profile":
-                    dst ="/etc/profile"
-                    shutil.copy(src, dst)
-                case "dhclient":
-                    dst ="/etc/dhcp/dhclient.conf"
-                    shutil.copy(src, dst)
-                case "fstab":
-                    dst ="/etc/fstab"
-                    shutil.copy(src, dst)
-                case "hostname":
-                    dst ="/etc/hostname"
-                    shutil.copy(src, dst)
-                case "hosts":
-                    dst ="/etc/hosts"
-                    shutil.copy(src, dst)
-                case "mime":
-                    dst ="/etc/mime.types"
-                    shutil.copy(src, dst)
-                case "ssh":
-                    dst =HOME + "/.ssh/config"
-                    shutil.copy(src, dst)
-                case "x11":
-                    dst ="/etc/X11/xorg.conf"
-                    shutil.copy(src, dst)
-                case "sysconfig":
-                    # dst ="/etc/fstab"
-                    # shutil.copy(src, dst)
-                    print("Я не сделал")
-                case "sudoers":
-                    dst ="/etc/sudoers"
-                    shutil.copy(src, dst)
-                case "grub":
-                    dst ="/etc/default/grub"
-                    shutil.copy(src, dst)
-                case "xinitrc":
-                    dst =HOME + "/.xinitrc"
-                    shutil.copy(src, dst)
-                case "gitconfig":
-                    dst =HOME + "/gitconfig"
-                    shutil.copy(src, dst)
+            for i in SOURCES:
+                filenames.append(os.path.basename(i))
+                for j in filenames:
+                        if j == btn_name:
+                            shutil.copy(src,i)
 
 
 
